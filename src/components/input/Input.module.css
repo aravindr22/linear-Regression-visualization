@@ -1,0 +1,14 @@
+.drop{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.dropped {
+    border: 4px solid green;
+}
+
+.notdropped {
+    border: 2px solid gray;
+}

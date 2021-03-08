@@ -1,0 +1,15 @@
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.chartSize {
+  margin: auto;
+  width: 70%;
+  height: 40%;
+}
+
+.input{
+  margin: auto;
+}
