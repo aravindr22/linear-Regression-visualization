@@ -25,9 +25,10 @@ function App() {
   const [added, setAdded] = useState(false);
   const [show, setShow] = useState(false);
   const [modalShow, setmodalShow] = useState(false);
+  const [addedfxtoBack, setaddedfxtoBack] = useState(false);
 
   if(added){
-    console.log(xfx)
+    console.log(xfx);
     setShow(true);
     setmodalShow(true);
     setxfx(() => [...xfx, +addVal])
@@ -90,6 +91,9 @@ function App() {
     }
     let r = calfx.map(x => Number(x.toFixed(2)))
     setfx(() => [...r]);
+    setShow(true);
+    setmodalShow(true);
+    setaddedfxtoBack(true);
   }
 
   let CalButton = (
@@ -106,6 +110,7 @@ function App() {
   function close(){
     setShow(false);
     setmodalShow(false);
+    setaddedfxtoBack(false);
   }
 
   console.log(x,y,"->",xfx)
@@ -114,7 +119,21 @@ function App() {
   return (
     <div className={classes.App}>
       <Backdrop show={show} clicked={close}/>
-      <Modal show={modalShow}></Modal>
+      {/* logical must be done */}
+      <Modal show={modalShow}>
+        <p>The f(x) Equation is:   f(x) = {matrixA[0]} + {matrixA[1]}x</p>
+        {addedfxtoBack?
+          <div>
+            <br />
+            <p>The f(x) for {addVal} : {fx[fx.length-1]}</p>
+            <p>The value now update to Scatter Chart</p>
+          </div>
+          : 
+          <div>
+            The Data is added next click calculate f(x)
+          </div>  
+        }
+      </Modal>
       <div className='mx-auto border-2'>
         <Input 
           setcsvdata={setcsvdata} 
