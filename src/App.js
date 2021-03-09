@@ -20,6 +20,7 @@ function App() {
   const [y, setY] = useState([]);
   const [fx, setfx] = useState([]);
   const [xfx, setxfx] = useState([]);
+  const [sumofErrors, setsumofErrors] = useState(0);
   const [matrixA, setMatrixA] = useState([]);
   const [addVal, setAddVal] = useState();
   const [added, setAdded] = useState(false);
@@ -33,18 +34,17 @@ function App() {
   useEffect(() => {
     if(count === 2){
       setLogic(() => true);
+      calculatesumofsquareoferrors();
     } else if(count === 3){
       setLogic2(true);
     }
   }, [count]);
 
   if(added){
-    console.log(xfx);
     setShow(true);
     setmodalShow(true);
     setxfx(() => [...xfx, +addVal])
     setX(() => x.filter(a => a !== +addVal))
-    console.log(xfx);
     setAdded(false);
   }
 
@@ -108,6 +108,18 @@ function App() {
     setCount(() => count + 1);
   }
 
+  function calculatesumofsquareoferrors(){
+    let e = [], modifiede = [];
+    for(let i=0;i<x.length;i++){
+      e.push(y[i] - fx[i]);
+    }
+    for(let i of e){
+      modifiede.push(i*i);
+    }
+    let sum =  modifiede.reduce((a,b) => a + b, 0);
+    setsumofErrors(sum);
+  }
+
   let CalButton = (
     <div className={classes.CalButton}>
       <button 
@@ -133,15 +145,13 @@ function App() {
   }
 
 
-  console.log(x,y,"->",xfx)
-  console.log(matrixA, fx)
-  console.log(addVal, added, count)
   return (
     <div className={classes.App}>
       <Backdrop show={show && locgic} clicked={close}/>
       {/* logical must be done */}
       <Modal show={modalShow && locgic}>
         <p>The f(x) Equation is:   f(x) = {matrixA[0]} + ({matrixA[1]})x</p>
+        <p>The Sum of Square of Errors is: {sumofErrors}</p>
         {locgic2?  
           addedfxtoBack ? display : 
           <div>
