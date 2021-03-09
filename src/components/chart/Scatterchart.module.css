@@ -1,0 +1,13 @@
+.check{
+    margin: auto;
+    margin-bottom: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.box{
+    margin: 10px;
+    width: 20px;
+    height: 20px;
+}

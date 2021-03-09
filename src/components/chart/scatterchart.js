@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {Fragment, useState} from 'react'
 import {Scatter} from 'react-chartjs-2';
 
-function scatterchart(props) {
+import classes from './Scatterchart.module.css';
+import Checkbox from '../input/Checkbox';
+
+function Scatterchart(props) {
+
+    const [sdCheck, setsdCheck] = useState(false);
+    const [fxCheck, setfxCheck] = useState(false);
 
     let x = props.x;
     let y = props.y;
@@ -18,6 +24,22 @@ function scatterchart(props) {
         lis2.push({x: xfx[i], y: fx[i]});
     }
 
+    let sampleData = {}, valuexfx = {};
+
+    if(sdCheck){
+        sampleData = {
+            type: 'line',
+            fill: null
+        };
+    }
+    if(fxCheck){
+        valuexfx = {
+            type: 'line',
+            fill: null
+        }
+    }
+
+
     const data = {
         datasets: [{
             label: 'Sample Data Sets',
@@ -25,17 +47,18 @@ function scatterchart(props) {
             backgroundColor: 'red',
             pointRadius: 4,
             pointHoverRadius: 6,
-            hoverBackgroundColor: 'orange'
+            hoverBackgroundColor: 'orange',
+            borderColor: 'red',
+            ...sampleData
         },{
             label: "Value of f(X)",
             data: lis2,
-            type: 'line',
-            fill: null,
             backgroundColor: 'blue',
             pointRadius: 4,
             pointHoverRadius: 6,
             hoverBackgroundColor: 'rgba(205,19,242)',
-            borderColor: 'rgba(19,19,242)'
+            borderColor: 'rgba(19,19,242)',
+            ...valuexfx
         }]
     }
 
@@ -61,8 +84,22 @@ function scatterchart(props) {
     }
 
     return (
-        <Scatter data={data} options={options} />
+        <Fragment>
+            <Scatter data={data} options={options} />
+            <div className={classes.check}>
+                <Checkbox 
+                    className={classes.box}
+                    value="Connect Sample Data Values"
+                    checked={sdCheck}
+                    onChange={() => setsdCheck(!sdCheck)}/>
+                <Checkbox 
+                    className={classes.box}
+                    value="Connect value of f(x) Values"
+                    checked={fxCheck}
+                    onChange={() => setfxCheck(!fxCheck)}/>
+            </div>
+        </Fragment>
     )
 }
 
-export default scatterchart;
+export default Scatterchart;

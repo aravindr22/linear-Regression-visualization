@@ -4,7 +4,7 @@ import {transpose, inv, round} from 'mathjs';
 
 import Input from './components/input/Input';
 import Checkbox from './components/input/Checkbox';
-import Scatterchart from './components/chart/scatterchart';
+import Scatterchart from './components/chart/Scatterchart';
 import LineChart from './components/chart/lineChart';
 import ChartInput from './components/input/chartInput/ChartInput';
 import Backdrop from './components/Backdrop/Backdrop';
@@ -134,7 +134,7 @@ function App() {
       <div>
         <br />
         <p>The f(x) for {addVal} : {fx[fx.length-1]}</p>
-        <p>The value now update to Scatter Chart</p>
+        <p>The value now update to Scatter Chart And Line Chart</p>
       </div>
     );
 
@@ -155,7 +155,7 @@ function App() {
         {locgic2?  
           addedfxtoBack ? display : 
           <div>
-            The Data is added next click calculate f(x)
+            The Data is added next click calculate f(x) to plot on graph
           </div>  
           :
           null
