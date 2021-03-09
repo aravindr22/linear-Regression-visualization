@@ -6,14 +6,18 @@ function scatterchart(props) {
     let x = props.x;
     let y = props.y;
     let fx = props.fx;
+    let xfx = props.xfx
     if(isNaN(fx[0])){
         fx = [];
     }
     let lis = [], lis2 = [];
     for(let i=0;i<x.length;i++){
         lis.push({x: x[i],y: y[i]});
-        lis2.push({x: x[i], y: fx[i]});
     }
+    for(let i=0;i<xfx.length;i++){
+        lis2.push({x: xfx[i], y: fx[i]});
+    }
+
     const data = {
         datasets: [{
             label: 'Sample Data Sets',

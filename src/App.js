@@ -6,7 +6,9 @@ import Input from './components/input/Input';
 import Checkbox from './components/input/Checkbox';
 import Scatterchart from './components/chart/scatterchart';
 import LineChart from './components/chart/lineChart';
-import ChartInput from './components/input/chartInput/chartInput';
+import ChartInput from './components/input/chartInput/ChartInput';
+import Backdrop from './components/Backdrop/Backdrop';
+import Modal from './components/modal/Modal';
 
 function App() {
 
@@ -17,8 +19,22 @@ function App() {
   const [x, setX] = useState([]);
   const [y, setY] = useState([]);
   const [fx, setfx] = useState([]);
+  const [xfx, setxfx] = useState([]);
   const [matrixA, setMatrixA] = useState([]);
-  const [addVal, setAddVal] = useState(0);
+  const [addVal, setAddVal] = useState();
+  const [added, setAdded] = useState(false);
+  const [show, setShow] = useState(false);
+  const [modalShow, setmodalShow] = useState(false);
+
+  if(added){
+    console.log(xfx)
+    setShow(true);
+    setmodalShow(true);
+    setxfx(() => [...xfx, +addVal])
+    setX(() => x.filter(a => a !== +addVal))
+    console.log(xfx);
+    setAdded(false);
+  }
 
   if(updated){
     let sx = [];
@@ -29,6 +45,7 @@ function App() {
     }
     setX(() => sx);
     setY(() => sy);
+    setxfx(() => sx);
     setupdated(false)
   }
 
@@ -67,7 +84,7 @@ function App() {
 
   function calculateFx(){
     let val,calfx = [];
-    for(let i of x){
+    for(let i of xfx){
       val = matrixA[0] + (matrixA[1]*i)
       calfx.push(val)
     }
@@ -86,15 +103,23 @@ function App() {
     </div>
   );
 
-  console.log(x,y)
+  function close(){
+    setShow(false);
+    setmodalShow(false);
+  }
+
+  console.log(x,y,"->",xfx)
   console.log(matrixA, fx)
+  console.log(addVal, added)
   return (
     <div className={classes.App}>
+      <Backdrop show={show} clicked={close}/>
+      <Modal show={modalShow}></Modal>
       <div className='mx-auto border-2'>
         <Input 
           setcsvdata={setcsvdata} 
           setupdated={setupdated} 
-          setAddVal={setAddVal}/>
+          />
       </div>
       
       <div className={classes.check}>
@@ -113,10 +138,10 @@ function App() {
       </div>
 
       <div className={classes.chartSize}>
-        {checkedLC ? <LineChart x={x} y={y} fx={fx}/> : null}
-        {checkedSC ? <Scatterchart x={x} y={y} fx={fx}/> : null }
+        {checkedLC ? <LineChart x={x} y={y} xfx={xfx} fx={fx}/> : null}
+        {checkedSC ? <Scatterchart x={x} y={y} xfx={xfx} fx={fx}/> : null }
         {checkedLC || checkedSC ? CalButton : null}
-        {checkedLC || checkedSC ? <ChartInput /> : null}
+        {checkedLC || checkedSC ? <ChartInput setAddVal={setAddVal} setAdded={setAdded} /> : null}
       </div>
     </div>
   );

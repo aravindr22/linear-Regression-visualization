@@ -6,8 +6,7 @@ function linechart(props) {
         labels: props.x,
         datasets: [
             {
-                label: "Sample Data Set",
-                
+                label: "Sample Data Set",                
                 data: props.y,
                 backgroundColor: 'red',
                 pointRadius: 4,
