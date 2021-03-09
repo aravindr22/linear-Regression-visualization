@@ -5,9 +5,14 @@ function scatterchart(props) {
 
     let x = props.x;
     let y = props.y;
-    let lis = [];
+    let fx = props.fx;
+    if(isNaN(fx[0])){
+        fx = [];
+    }
+    let lis = [], lis2 = [];
     for(let i=0;i<x.length;i++){
         lis.push({x: x[i],y: y[i]});
+        lis2.push({x: x[i], y: fx[i]});
     }
     const data = {
         datasets: [{
@@ -17,6 +22,16 @@ function scatterchart(props) {
             pointRadius: 4,
             pointHoverRadius: 6,
             hoverBackgroundColor: 'orange'
+        },{
+            label: "Value of f(X)",
+            data: lis2,
+            type: 'line',
+            fill: null,
+            backgroundColor: 'blue',
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            hoverBackgroundColor: 'rgba(205,19,242)',
+            borderColor: 'rgba(19,19,242)'
         }]
     }
 

@@ -1,0 +1,26 @@
+.bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 2px;
+}
+
+.button {
+    text-decoration: none;
+    border: none;
+    background-color: white;
+    padding: 7px 14px;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 0 10px 15px;
+    color: black; 
+    border: 2px solid #3d0cee;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button:hover {
+    background-color: #3d0cee;
+    color: white;
+}

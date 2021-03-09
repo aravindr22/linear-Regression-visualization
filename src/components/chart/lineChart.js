@@ -6,6 +6,8 @@ function linechart(props) {
         labels: props.x,
         datasets: [
             {
+                label: "Sample Data Set",
+                
                 data: props.y,
                 backgroundColor: 'red',
                 pointRadius: 4,
@@ -14,6 +16,17 @@ function linechart(props) {
                 showLine: true,
                 fill: null,
                 borderColor: 'rgba(247, 69, 93)'
+            },
+            {
+                label: "Value of f(X)",
+                data: props.fx,
+                backgroundColor: 'blue',
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                hoverBackgroundColor: 'rgba(205,19,242)',
+                showLine: true,
+                fill: null,
+                borderColor: 'rgba(19,19,242)'
             }
         ]
     }

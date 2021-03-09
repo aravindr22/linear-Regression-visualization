@@ -26,3 +26,30 @@
   width: 20px;
   height: 20px;
 }
+
+.CalButton{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  padding: 5px;
+}
+
+.button {
+  text-decoration: none;
+  border: none;
+  background-color: white;
+  padding: 14px 28px;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  color: black; 
+  border: 2px solid #f44336;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button:hover {
+  background-color: #f44336;
+  color: white;
+}

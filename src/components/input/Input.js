@@ -6,7 +6,6 @@ import classes from './Input.module.css';
 function Input(props) {
 
     const [highlited, setHighlited] = useState(false);
-    const [csvdata, setcsvdata] = useState([])
 
     let cssClass = [classes.drop,classes.notdropped];
     if(highlited){
@@ -16,7 +15,11 @@ function Input(props) {
     return (
         <Fragment>
             <div>
-                <h1>Drop The Sample Data CSV File Here</h1>
+                <h3
+                    style={{"display": "flex", "justifyContent": "center"}}
+                >
+                    Drop The Sample Data CSV File Here
+                </h3>
             </div>
             <div className={cssClass.join(' ')}
                 onDragEnter={() => {
@@ -39,6 +42,7 @@ function Input(props) {
                         props.setupdated(true);                    
                     })
                 }}
+                style={{"width": "720px"}}
             >
                 Drag n Drop Here
             </div>
