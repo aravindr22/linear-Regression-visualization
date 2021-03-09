@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './App.module.css';
 import {transpose, inv, round} from 'mathjs';
 
@@ -26,6 +26,17 @@ function App() {
   const [show, setShow] = useState(false);
   const [modalShow, setmodalShow] = useState(false);
   const [addedfxtoBack, setaddedfxtoBack] = useState(false);
+  const [locgic, setLogic] = useState(false);
+  const [locgic2, setLogic2] = useState(false);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if(count === 2){
+      setLogic(() => true);
+    } else if(count === 3){
+      setLogic2(true);
+    }
+  }, [count]);
 
   if(added){
     console.log(xfx);
@@ -94,6 +105,7 @@ function App() {
     setShow(true);
     setmodalShow(true);
     setaddedfxtoBack(true);
+    setCount(() => count + 1);
   }
 
   let CalButton = (
@@ -106,6 +118,13 @@ function App() {
       </button>
     </div>
   );
+    let display = (
+      <div>
+        <br />
+        <p>The f(x) for {addVal} : {fx[fx.length-1]}</p>
+        <p>The value now update to Scatter Chart</p>
+      </div>
+    );
 
   function close(){
     setShow(false);
@@ -113,25 +132,23 @@ function App() {
     setaddedfxtoBack(false);
   }
 
+
   console.log(x,y,"->",xfx)
   console.log(matrixA, fx)
-  console.log(addVal, added)
+  console.log(addVal, added, count)
   return (
     <div className={classes.App}>
-      <Backdrop show={show} clicked={close}/>
+      <Backdrop show={show && locgic} clicked={close}/>
       {/* logical must be done */}
-      <Modal show={modalShow}>
-        <p>The f(x) Equation is:   f(x) = {matrixA[0]} + {matrixA[1]}x</p>
-        {addedfxtoBack?
-          <div>
-            <br />
-            <p>The f(x) for {addVal} : {fx[fx.length-1]}</p>
-            <p>The value now update to Scatter Chart</p>
-          </div>
-          : 
+      <Modal show={modalShow && locgic}>
+        <p>The f(x) Equation is:   f(x) = {matrixA[0]} + ({matrixA[1]})x</p>
+        {locgic2?  
+          addedfxtoBack ? display : 
           <div>
             The Data is added next click calculate f(x)
           </div>  
+          :
+          null
         }
       </Modal>
       <div className='mx-auto border-2'>

@@ -6,9 +6,10 @@ import classes from './Input.module.css';
 function Input(props) {
 
     const [highlited, setHighlited] = useState(false);
+    const [recieved, setRecieved] = useState(false);
 
     let cssClass = [classes.drop,classes.notdropped];
-    if(highlited){
+    if(highlited || recieved){
         cssClass = [classes.drop,classes.dropped];
     }
 
@@ -41,10 +42,11 @@ function Input(props) {
                         props.setcsvdata((csvdata) => [...result.data]);    
                         props.setupdated(true);                    
                     })
+                    setRecieved(true);
                 }}
                 style={{"width": "720px"}}
             >
-                Drag n Drop Here
+                {recieved? "File recieved" : "Drag n Drop Here"}
             </div>
         </Fragment>
     )
